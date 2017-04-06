@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Build all the Dockerfiles into images named after their directories.
 for file in *; do
     if [[ -f $file/Dockerfile ]]; then
@@ -15,6 +17,7 @@ while read cmd; do
     parts=($cmd);
     cmdName=${parts[0]}
     imageName=${parts[1]}
+    additionalFlags=${parts[@]:2}
     shimName=$HOME/bin/$cmdName
     echo "Writing $imageName.$cmdName shim"
 
@@ -23,9 +26,9 @@ while read cmd; do
 
 case "\$-" in
     *i*)
-        docker run --rm -v "\$(pwd)":/workdir -w /workdir -it $imageName $cmdName "\$@";;
+        docker run --rm $additionalFlags -v "\$(pwd)":/workdir -w /workdir -it $imageName $cmdName "\$@";;
     *)
-        docker run --rm -v "\$(pwd)":/workdir -w /workdir $imageName $cmdName "\$@";;
+        docker run --rm $additionalFlags -v "\$(pwd)":/workdir -w /workdir $imageName $cmdName "\$@";;
 esac
 
 EOF

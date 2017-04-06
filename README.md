@@ -18,7 +18,8 @@ That's what this technique is for.
 1. Fork this repo
 2. For each command you want to shim, create a directory and a Dockerfile that can produce a container capable of running that command.
 3. Add the command name to the `commands` file along with the name of the directory you just created.
-4. Run `install.sh` in order to build the docker images, tag them based on their directory names, and generate executable shims in `$HOME/bin` which act just like the original.
+4. Add any additional flags for `docker run` (e.g. a persistent volume, etc.)
+5. Run `install.sh` in order to build the docker images, tag them based on their directory names, and generate executable shims in `$HOME/bin` which act just like the original.
 
 ## Notes
 
