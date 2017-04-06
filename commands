@@ -2,3 +2,4 @@ rubocop ruby-dev
 ruby ruby-dev
 irb ruby-dev
 gcloud gcloud-dev -v gcloud-config:/root/.config/gcloud
+appcfg.py appengine-dev
